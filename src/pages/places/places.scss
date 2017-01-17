@@ -1,0 +1,84 @@
+page-places {
+
+  ion-content {
+    background-image:url(../assets/images/general/pepper-places-background.jpg);
+    background-size: cover;
+  }
+
+  .list-md ion-item-sliding {
+    background-color: transparent;
+  }
+
+  .item-wrapper {
+    background-color: transparent;
+  }
+
+  .item-block {
+    background-color: transparent;
+    padding: 3vw 3vw;
+    color:#fff;
+    border-bottom: 1px solid rgba(255,255,255,.3);
+
+    .item-inner {
+      border-bottom:none!important;
+      font-size: 4vw;
+    }
+
+    img {
+
+      &.icon {
+        height: 9vw;
+        vertical-align: middle;
+        margin-right: 1vw;
+      }
+
+      &.option {
+        height: 6vw;
+        vertical-align: middle;
+      }
+    }
+  }
+
+}
+
+.item-ios{
+
+  &:not([detail-none]){
+
+    .item-inner {
+      background-image: none!important;
+      padding-right: 0!important;
+    }
+
+  }
+
+  &.activated {
+    background-color: rgba(255,255,255,.3);
+  }
+
+}
+
+.item-md {
+
+  &.activated {
+    background-color: rgba(255,255,255,.3);
+  }
+
+}
+
+.list-md {
+
+  > .item-wrapper:first-child {
+    .item-block {
+      border-top:none;
+    }
+  }
+
+  > .item-block {
+
+    &:first-child {
+      border-top:none;
+    }
+
+  }
+}

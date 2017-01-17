@@ -1,0 +1,55 @@
+page-home-page {
+
+  .block-container {
+    height: 100%;
+
+    .slider
+    {
+      height:34%;
+      background-color: transparent;
+
+      .swiper-pagination-bullet {
+        background-color: #ffffff;
+      }
+    }
+
+    .btn-container{
+      height:66%;
+      position:relative;
+      overflow: visible;
+
+      a {
+        display: inline-block;
+        position: relative;
+        background-color: transparent;
+        color: #ffffff;
+        font-size: 1.7em;
+        width: 46%;
+        height: 44%;
+        margin: 2%;
+
+        > div {
+          height: 100%;
+          width:100%;
+          display:flex;
+          flex-direction: row;
+          align-items: center;
+          //justify-content:center;
+
+          > div {
+            width:100%;
+            text-align:center;
+          }
+
+          img {
+            width:21vw;
+            margin-bottom: 1vw;
+          }
+        }
+
+      }
+    }
+
+  }
+
+}

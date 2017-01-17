@@ -1,0 +1,62 @@
+page-history {
+
+  ion-content {
+    background-image:url(../assets/images/general/pepper-places-background.jpg);
+    background-size: cover;
+  }
+
+  .item-block {
+    background-color: transparent;
+    padding: 2vw 3vw;
+    color:#fff;
+    border-bottom: 1px solid rgba(255,255,255,.3);
+
+    .item-inner {
+      border-bottom:none!important;
+      font-size: 4vw;
+    }
+
+    img {
+      height: 5vw;
+      vertical-align: middle;
+      margin-right: 1vw;
+    }
+  }
+}
+
+.item-ios{
+
+  &:not([detail-none]){
+
+    .item-inner {
+      background-image: none!important;
+    }
+
+  }
+
+  &.activated {
+    background-color: rgba(255,255,255,.3);
+  }
+
+}
+
+.item-md {
+
+  &.activated {
+    background-color: rgba(255,255,255,.3);
+  }
+
+}
+
+.list-md {
+
+  > .item-block{
+
+    &:first-child{
+        border-top:none;
+    }
+
+  }
+}
+
+

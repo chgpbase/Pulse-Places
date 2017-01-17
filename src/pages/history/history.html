@@ -1,0 +1,25 @@
+<ion-header class="top-header">
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>History</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card *ngIf="items.length == 0">
+    <ion-card-content>
+      Add a place to unlock spots and objects in history.
+    </ion-card-content>
+  </ion-card>
+
+  <ion-list *ngIf="items && items.length > 0">
+    <button ion-item *ngFor="let item of items" (click)="openHistory($event, item)">
+      <img src="{{item.icon}}" />
+      {{item.title}}
+    </button>
+  </ion-list>
+
+</ion-content>

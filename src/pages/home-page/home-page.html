@@ -1,0 +1,35 @@
+<ion-header class="top-header">
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Pulse Places</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="block-container">
+    <div class="slider">
+      <ion-slides [options]="headerSliderOptions">
+
+        <ion-slide *ngFor="let s of slides" [ngStyle]="{'background-color': s.bgColor}">
+          <img [src]="s.slide">
+          <h2 [hidden]="s.title==null||s.title==''">{{s.title}}</h2>
+        </ion-slide>
+
+      </ion-slides>
+    </div>
+    <div class="btn-container">
+      <a *ngFor="let h of homeButtons" (click)="clickEventHandler(h)">
+        <div>
+            <div>
+              <img [src]="h.icon"><br />
+              {{h.title}}
+            </div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+</ion-content>
