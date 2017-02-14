@@ -17,15 +17,11 @@ export class PlatformApi {
 
   constructor(
     public http: Http,
-    public globalVars: GlobalVars,
-    public platformData: PlatformData,
-    public platformGeolocation: PlatformGeolocation,
-    public platformBeacons: PlatformBeacons
+    private globalVars: GlobalVars,
+    private platformData: PlatformData,
+    private platformGeolocation: PlatformGeolocation,
+    private platformBeacons: PlatformBeacons
   ) {
-    this.globalVars = globalVars;
-    this.platformData = platformData;
-    this.platformGeolocation = platformGeolocation;
-    this.platformBeacons = platformBeacons;
   }
 
   /*

@@ -17,9 +17,8 @@ export class PlatformData {
   constructor(
     public platform: Platform,
     public http: Http,
-    public globalVars: GlobalVars
+    private globalVars: GlobalVars
   ) {
-    this.globalVars = globalVars;
   }
 
   /*

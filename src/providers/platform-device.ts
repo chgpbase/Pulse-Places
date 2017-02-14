@@ -12,7 +12,7 @@ export class PlatformDevice {
 
   constructor(
     public http: Http,
-    public globalVars: GlobalVars
+    private globalVars: GlobalVars
   ) {
   }
 

@@ -19,13 +19,10 @@ export class PlatformGeolocation {
   constructor(
     public http: Http,
     private platform: Platform,
-    public globalVars: GlobalVars,
-    public platformData: PlatformData,
-    public platformScenario: PlatformScenario
+    private globalVars: GlobalVars,
+    private platformData: PlatformData,
+    private platformScenario: PlatformScenario
   ) {
-    this.platform = platform;
-    this.platformData = platformData;
-    this.platformScenario = platformScenario;
   }
 
   /*

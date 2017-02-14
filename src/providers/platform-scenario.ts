@@ -18,10 +18,8 @@ export class PlatformScenario {
   constructor(
     public http: Http,
     private platform: Platform,
-    public globalVars: GlobalVars
+    private globalVars: GlobalVars
   ) {
-    this.platform = platform;
-    this.globalVars = globalVars;
   }
 
   openWebView(url: string) {

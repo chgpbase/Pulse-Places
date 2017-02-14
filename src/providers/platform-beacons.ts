@@ -14,11 +14,9 @@ export class PlatformBeacons {
 
   constructor(
     public http: Http,
-    public platformData: PlatformData,
-    public platformScenario: PlatformScenario
+    private platformData: PlatformData,
+    private platformScenario: PlatformScenario
   ) {
-    this.platformData = platformData;
-    this.platformScenario = platformScenario;
   }
 
   /*

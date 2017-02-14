@@ -19,19 +19,13 @@ export class PlatformService {
 
   constructor(
     public http: Http,
-    public globalVars: GlobalVars,
-    public platformData: PlatformData,
-    public platformGeolocation: PlatformGeolocation,
-    public platformBeacons: PlatformBeacons,
-    public platformApi: PlatformApi,
-    public platformDevice: PlatformDevice
+    private globalVars: GlobalVars,
+    private platformData: PlatformData,
+    private platformGeolocation: PlatformGeolocation,
+    private platformBeacons: PlatformBeacons,
+    private platformApi: PlatformApi,
+    private platformDevice: PlatformDevice
   ) {
-    this.globalVars = globalVars;
-    this.platformData = platformData;
-    this.platformGeolocation = platformGeolocation;
-    this.platformBeacons = platformBeacons;
-    this.platformApi = platformApi;
-    this.platformDevice = platformDevice;
   }
 
   /*
