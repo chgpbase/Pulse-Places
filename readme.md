@@ -23,6 +23,14 @@ After you've downloaded the project, open the `config.xml` in the root and updat
 
 ### Add plugins
 
+#### All plugins add once
+
+ - `$ ionic plugin add cordova-plugin-statusbar cordova-plugin-device cordova-sqlite-storage phonegap-plugin-barcodescanner cordova-plugin-geolocation cordova-plugin-geofence cordova-plugin-ibeacon cordova-plugin-safariviewcontroller de.appplant.cordova.plugin.local-notification --save`
+
+  - `$ npm install @ionic-native/status-bar @ionic-native/device @ionic-native/sqlite @ionic-native/barcode-scanner @ionic-native/geolocation @ionic-native/geofence @ionic-native/ibeacon @ionic-native/safari-view-controller @ionic-native/local-notifications --save`
+
+#### All plugins separately
+
  - `$ ionic plugin add cordova-plugin-statusbar`
  - `$ npm install --save @ionic-native/status-bar`
 
