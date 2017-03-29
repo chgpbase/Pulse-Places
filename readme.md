@@ -23,14 +23,32 @@ After you've downloaded the project, open the `config.xml` in the root and updat
 
 ### Add plugins
 
+ - `$ ionic plugin add cordova-plugin-statusbar`
+ - `$ npm install --save @ionic-native/status-bar`
+
  - `$ ionic plugin add cordova-plugin-device`
+ - `$ npm install --save @ionic-native/device`
+
  - `$ ionic plugin add cordova-sqlite-storage`
+ - `$ npm install --save @ionic-native/sqlite`
+
  - `$ ionic plugin add phonegap-plugin-barcodescanner`
+ - `$ npm install --save @ionic-native/barcode-scanner`
+
  - `$ ionic plugin add cordova-plugin-geolocation`
+ - `$ npm install --save @ionic-native/geolocation`
+
+ - `$ ionic plugin add cordova-plugin-geofence`
+ - `$ npm install --save @ionic-native/geofence`
+
  - `$ ionic plugin add cordova-plugin-ibeacon`
- - `$ ionic plugin add https://github.com/EddyVerbruggen/cordova-plugin-local-notifications`
+ - `$ npm install --save @ionic-native/ibeacon`
+
  - `$ ionic plugin add cordova-plugin-safariviewcontroller`
- - `$ ionic plugin add https://github.com/cowbell/cordova-plugin-geofence`
+ - `$ npm install --save @ionic-native/safari-view-controller`
+
+ - `$ ionic plugin add de.appplant.cordova.plugin.local-notification`
+ - `$ npm install --save @ionic-native/local-notifications`
 
 #### Cordova Geofence Plugin
 The Cordova Geofence Plugin requires some extra settings for iOS. In Xcode set:
