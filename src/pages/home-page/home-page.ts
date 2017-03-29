@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Platform, NavController, AlertController, LoadingController } from 'ionic-angular/index';
-import { BarcodeScanner } from 'ionic-native';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
 import { PlacesPage } from '../places/places';
 import { HistoryPage } from '../history/history';
@@ -25,6 +25,7 @@ export class HomePage {
   homeButtons: Array<{title: string, clickEvent: any, icon: string}>;
 
   constructor(
+    private barcodeScanner: BarcodeScanner,
     public navCtrl: NavController,
     public platform: Platform,
     public loadingCtrl: LoadingController,
@@ -33,10 +34,10 @@ export class HomePage {
     public platformApi: PlatformApi,
     public platformScenario: PlatformScenario
   ) {
-    this.navCtrl = navCtrl;
-    this.platformApi = platformApi;
-    this.platformScenario = platformScenario;
-    this.platformData = platformData;
+    //this.navCtrl = navCtrl;
+    //this.platformApi = platformApi;
+    //this.platformScenario = platformScenario;
+    //this.platformData = platformData;
 
     // Update slider when platform is ready
     this.platform.ready().then(() => {
@@ -91,7 +92,7 @@ export class HomePage {
   }
 
   scanQr(event) {
-    BarcodeScanner.scan().then((barcodeData) => {
+    event.barcodeScanner.scan().then((barcodeData) => {
      // Success! Barcode data is here
      console.log(barcodeData);
 

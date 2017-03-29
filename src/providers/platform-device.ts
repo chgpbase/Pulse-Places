@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
-import { Device } from 'ionic-native';
+import { Device } from '@ionic-native/device';
 
 // Global vars
 import { GlobalVars } from '../providers/global-vars';
@@ -12,7 +12,8 @@ export class PlatformDevice {
 
   constructor(
     public http: Http,
-    private globalVars: GlobalVars
+    private globalVars: GlobalVars,
+    private device: Device
   ) {
   }
 
@@ -21,9 +22,8 @@ export class PlatformDevice {
    */
   getDevice() {
     return new Promise((resolve, reject) => {
-      let device = Device;
-      this.globalVars.setDevice(device);
-      resolve(device);
+      this.globalVars.setDevice(this.device);
+      resolve(this.device);
     });
   }
 }

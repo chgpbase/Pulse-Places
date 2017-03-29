@@ -1,7 +1,8 @@
 import { Platform } from 'ionic-angular';
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { Geolocation, Geofence } from 'ionic-native';
+import { Geolocation } from '@ionic-native/geolocation';
+import { Geofence } from '@ionic-native/geofence';
 import 'rxjs/add/operator/map';
 
 import * as AppConfig from '../appConfig';
@@ -21,7 +22,9 @@ export class PlatformGeolocation {
     private platform: Platform,
     private globalVars: GlobalVars,
     private platformData: PlatformData,
-    private platformScenario: PlatformScenario
+    private platformScenario: PlatformScenario,
+    private geofence: Geofence,
+    private geolocation: Geolocation
   ) {
   }
 
@@ -31,7 +34,7 @@ export class PlatformGeolocation {
   init() {
     return new Promise((resolve, reject) => {
       var that = this;
-      Geofence.initialize().then(function () {
+      this.geofence.initialize().then(function () {
         console.log("Successful geofence initialization");
         that.listenToGeofences();
         resolve(true);
@@ -47,7 +50,7 @@ export class PlatformGeolocation {
    */
   getLocation() {
     return new Promise((resolve, reject) => {
-      Geolocation.getCurrentPosition({ timeout:3000 }).then((resp) => {
+      this.geolocation.getCurrentPosition({ timeout:3000 }).then((resp) => {
         // resp.coords.latitude
         // resp.coords.longitude
         let coords = resp.coords;
@@ -68,7 +71,7 @@ export class PlatformGeolocation {
    */
   removeAllListeners() {
     return new Promise((resolve, reject) => {
-      Geofence.removeAll()
+      this.geofence.removeAll()
       .then(function () {
         console.log('All geofences successfully removed.');
         resolve(true);
@@ -92,7 +95,7 @@ export class PlatformGeolocation {
           console.log("Subscribe to geofence(s)");
           console.log(geofencesToSubscribe);
 
-          Geofence.addOrUpdate(geofencesToSubscribe)
+          this.geofence.addOrUpdate(geofencesToSubscribe)
           .then((result) => {
             //this.listenToGeofences();
             resolve(true);
@@ -109,10 +112,10 @@ export class PlatformGeolocation {
    */
   listenToGeofences() {
     let that = this;
-    Geofence.onTransitionReceived()
+    this.geofence.onTransitionReceived()
     .subscribe(geofences => {
 
-      console.log("Geofence.onTransitionReceived()");
+      console.log("this.geofence.onTransitionReceived()");
       console.log(geofences);
 
       geofences.forEach(function (geofence) {
@@ -163,7 +166,7 @@ export class PlatformGeolocation {
               can_trigger_scenario = parseInt(result.rows.item(0).can_trigger_scenario);
               previous_state = result.rows.item(0).state;
               previous_update = result.rows.item(0).updated;
-              previous_update = previous_update + 5;
+              previous_update = previous_update + 5000;
             }
 
             if (result.rows.length > 0 && previous_state != current_state && Date.now() >= previous_update) {

@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { Platform, MenuController, Nav } from 'ionic-angular';
-import { StatusBar, Geofence } from 'ionic-native';
+import { StatusBar } from '@ionic-native/status-bar';
+import { Geofence } from '@ionic-native/geofence';
 
 // Pages
 import { HomePage } from '../pages/home-page/home-page';
@@ -41,7 +42,9 @@ export class MyApp {
     public menu: MenuController,
     public platformService: PlatformService, // Proximity Platform
     public platformScenario: PlatformScenario,
-    public platformGeolocation: PlatformGeolocation
+    public platformGeolocation: PlatformGeolocation,
+    private geofence: Geofence,
+    private statusBar: StatusBar
   ) {
     // Proximity Platform
     this.platformService = platformService;
@@ -60,12 +63,12 @@ export class MyApp {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      StatusBar.styleDefault();
+      this.statusBar.styleDefault();
 
       // Listen for background geofence notifications
       // Android only
     	if (this.platform.is('android')) {
-        Geofence.onNotificationClicked()
+        this.geofence.onNotificationClicked()
         .subscribe(notificationData => {
           console.log('App opened from Geo Notification!', notificationData);
 

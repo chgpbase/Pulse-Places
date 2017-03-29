@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { IBeacon } from 'ionic-native';
+import { IBeacon } from '@ionic-native/ibeacon';
 import 'rxjs/add/operator/map';
 
 // Platform services
@@ -15,7 +15,8 @@ export class PlatformBeacons {
   constructor(
     public http: Http,
     private platformData: PlatformData,
-    private platformScenario: PlatformScenario
+    private platformScenario: PlatformScenario,
+    private ibeacon: IBeacon
   ) {
   }
 
@@ -25,10 +26,10 @@ export class PlatformBeacons {
   init() {
     return new Promise((resolve, reject) => {
       // Request permission to use location on iOS
-      IBeacon.requestAlwaysAuthorization();
+      this.ibeacon.requestAlwaysAuthorization();
 
       // create a new delegate and register it with the native layer
-      this.delegate = IBeacon.Delegate();
+      this.delegate = this.ibeacon.Delegate();
 
       this.listenToBeacons();
 
@@ -42,7 +43,7 @@ export class PlatformBeacons {
   removeAllListeners() {
     return new Promise((resolve, reject) => {
 /*
-      IBeacon.getMonitoredRegions()
+      this.ibeacon.getMonitoredRegions()
       .then(
         (regions) => {
           if (regions.length > 0) {
@@ -54,12 +55,12 @@ export class PlatformBeacons {
         error => console.error('Get monitored regions failed: ', error)
       );
 */
-      return IBeacon.getRangedRegions()
+      return this.ibeacon.getRangedRegions()
       .then(
         (regions) => {
           if (regions.length > 0) {
             for (let i = 0; i < regions.length; ++i) {
-              IBeacon.stopRangingBeaconsInRegion(regions[i] as any);
+              this.ibeacon.stopRangingBeaconsInRegion(regions[i] as any);
             }
           }
           resolve(true);
@@ -105,20 +106,20 @@ export class PlatformBeacons {
               console.log("Subscribe to beacon from db");
               console.log(beacon);
 
-              let beaconRegion = IBeacon.BeaconRegion(
+              let beaconRegion = this.ibeacon.BeaconRegion(
                 beacon.identifier,
                 beacon.uuid,
                 beacon.major,
                 beacon.minor
               );
 
-              IBeacon.startMonitoringForRegion(beaconRegion)
+              this.ibeacon.startMonitoringForRegion(beaconRegion)
               .then(
                 () => console.log('Native layer recieved the request to monitoring'),
                 error => console.error('Native layer failed to begin monitoring: ', error)
               );
 
-              IBeacon.startRangingBeaconsInRegion(beaconRegion)
+              this.ibeacon.startRangingBeaconsInRegion(beaconRegion)
               .then(
                 () => console.log('Native layer recieved the request to monitoring'),
                 error => console.error('Native layer failed to begin monitoring: ', error)
@@ -135,20 +136,20 @@ export class PlatformBeacons {
             console.log("Subscribe to beacon");
             console.log(beacon);
 
-            let beaconRegion = IBeacon.BeaconRegion(
+            let beaconRegion = this.ibeacon.BeaconRegion(
               beacon.identifier,
               beacon.uuid,
               beacon.major,
               beacon.minor
             );
 
-            IBeacon.startMonitoringForRegion(beaconRegion)
+            this.ibeacon.startMonitoringForRegion(beaconRegion)
             .then(
               () => console.log('Native layer recieved the request to monitoring'),
               error => console.error('Native layer failed to begin monitoring: ', error)
             );
 
-            IBeacon.startRangingBeaconsInRegion(beaconRegion)
+            this.ibeacon.startRangingBeaconsInRegion(beaconRegion)
             .then(
               () => console.log('Native layer recieved the request to monitoring'),
               error => console.error('Native layer failed to begin monitoring: ', error)
@@ -173,6 +174,8 @@ export class PlatformBeacons {
 						let beacon = data.beacons[i];
 						let beacon_id = parseInt(region.identifier.substring(1, region.identifier.length));
 
+            console.log('data.region: ' + data.region.identifier + ', beacon.proximity: ' + beacon.proximity);
+
 						if (beacon.proximity != 'ProximityUnknown') {
 							// Save state to db
 							this.platformData.db.executeSql("SELECT * FROM beacon_ranging WHERE id = ?", [beacon_id])
@@ -188,7 +191,7 @@ export class PlatformBeacons {
 									can_trigger_scenario = parseInt(result.rows.item(0).can_trigger_scenario);
 									previous_proximity = result.rows.item(0).current_proximity;
 									previous_update = result.rows.item(0).updated;
-									previous_update = previous_update + 5;
+									previous_update = previous_update + 5000;
 								}
 
 								if (result.rows.length > 0 && previous_proximity != current_proximity && Date.now() >= previous_update) {
@@ -278,7 +281,7 @@ export class PlatformBeacons {
 						can_trigger_scenario = parseInt(result.rows.item(0).can_trigger_scenario);
 						previous_state = result.rows.item(0).state;
 						previous_update = result.rows.item(0).updated;
-						previous_update = previous_update + 5;
+						previous_update = previous_update + 5000;
 					}
 
 					if (result.rows.length > 0 && previous_state != current_state && Date.now() >= previous_update) {
@@ -359,7 +362,7 @@ export class PlatformBeacons {
 						can_trigger_scenario = parseInt(result.rows.item(0).can_trigger_scenario);
 						previous_state = result.rows.item(0).state;
 						previous_update = result.rows.item(0).updated;
-						previous_update = previous_update + 5;
+						previous_update = previous_update + 5000;
 					}
 
 					if (result.rows.length > 0 && previous_state != current_state && Date.now() >= previous_update) {

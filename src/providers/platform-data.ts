@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
-import { SQLite } from 'ionic-native';
+import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 
 // Global vars
 import { GlobalVars } from '../providers/global-vars';
@@ -11,7 +11,8 @@ import * as AppConfig from '../appConfig';
 
 @Injectable()
 export class PlatformData {
-  public db: SQLite;
+  public db: SQLiteObject;
+  public sqlite: SQLite;
   private isOpen: boolean;
 
   constructor(
@@ -28,15 +29,16 @@ export class PlatformData {
     return new Promise((resolve, reject) => {
       if(! this.isOpen) {
         let sql = this.getSql();
-        this.db = new SQLite();
+        this.sqlite = new SQLite();
 
-        this.db.openDatabase({
+        this.sqlite.create({
           name: 'PlatformData.db',
           location: 'default' // the location field is required
-        }).then(() => {
-          this.db.sqlBatch(sql).then(() => {
+        }).then((db: SQLiteObject) => {
+          this.db = db;
+          db.sqlBatch(sql).then(() => {
             this.isOpen = true;
-            resolve(this.db);
+            resolve(db);
           }, (err) => {
             console.error('Unable to execute sql: ', err);
             reject(err);

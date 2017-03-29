@@ -1,6 +1,16 @@
-import { NgModule } from '@angular/core';
-import { IonicApp, IonicModule } from 'ionic-angular';
+import { NgModule, ErrorHandler } from '@angular/core';
+import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
+
+// Ionic Native
+import { StatusBar } from '@ionic-native/status-bar';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { LocalNotifications } from '@ionic-native/local-notifications';
+import { SafariViewController } from '@ionic-native/safari-view-controller';
+import { Geofence } from '@ionic-native/geofence';
+import { IBeacon } from '@ionic-native/ibeacon';
+import { Device } from '@ionic-native/device';
+import { Geolocation } from '@ionic-native/geolocation';
 
 // Global vars
 import { GlobalVars } from '../providers/global-vars';
@@ -28,7 +38,16 @@ import { HistoryPage } from '../pages/history/history';
     HistoryPage
   ],
   providers: [
-    GlobalVars
+    GlobalVars,
+    StatusBar,
+    BarcodeScanner,
+    LocalNotifications,
+    SafariViewController,
+    Geofence,
+    IBeacon,
+    Device,
+    Geolocation,
+    {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
 export class AppModule {}

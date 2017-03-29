@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { Platform } from 'ionic-angular';
-import { SafariViewController, LocalNotifications } from 'ionic-native';
+import { LocalNotifications } from '@ionic-native/local-notifications';
+import { SafariViewController } from '@ionic-native/safari-view-controller';
 import 'rxjs/add/operator/map';
 
 import * as AppConfig from '../appConfig';
@@ -17,18 +18,20 @@ export class PlatformScenario {
 
   constructor(
     public http: Http,
+    private localNotifications: LocalNotifications,
+    private safariViewController: SafariViewController,
     private platform: Platform,
     private globalVars: GlobalVars
   ) {
   }
 
   openWebView(url: string) {
-    SafariViewController.isAvailable()
+    this.safariViewController.isAvailable()
     .then(
       (available: boolean) => {
         if(available){
 
-          SafariViewController.show({
+          this.safariViewController.show({
             url: url,
             hidden: false,
             animated: false,
@@ -135,14 +138,14 @@ export class PlatformScenario {
 		// Local push notification
 		if (this.platform.is('android')) scenario.notification = scenario.notification.replace(/%%/g, '%');
 
-    LocalNotifications.schedule({
+    this.localNotifications.schedule({
       id: scenario.id,
       text: scenario.notification,
       at: Date.now() + (parseInt(scenario.delay) * 1000),
       data: { scenario: scenario }
     });
 
-    LocalNotifications.on("click", function (notification) {
+    this.localNotifications.on("click", function (notification) {
       console.log('LocalNotification clicked');
       let scenario = JSON.parse(notification.data);
       that.executeScenario(scenario.scenario);
