@@ -5,7 +5,7 @@ export let data = {
    * ---------------------------------------------------
    */
 
-  "platform_url" : "https://demo.pulseplatform.io",
+  "platform_url" : "https://pulse.nowsquare.com",
 
   /*
    * ---------------------------------------------------
@@ -14,7 +14,7 @@ export let data = {
    * associated scenarios) is loaded after opening the
    * app and can be used for custom apps.
    *
-   * E.g.: ['https://demo.pulseplatform.io/mobile/tour360']
+   * E.g.: ['https://pulse.nowsquare.com/mobile/tour360']
    * ---------------------------------------------------
    */
 
