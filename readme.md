@@ -2,7 +2,7 @@
 
 **Provide Bluetooth beacon and geofence services to your customers.**
 
-This app targets iOS and Android, and uses the [Pulse Platform](https://nowsquare.com/pulse-platform) API, https://nowsquare.com/pulse-platform/documentation/v2/API/scenario-boards.
+This app targets iOS and Android, and uses the [Pulse Platform](https://www2.nowsquare.com/pulse-platform) API, https://www2.nowsquare.com/pulse-platform/documentation/v2/API/scenario-boards.
 
 ## Prerequisites
 The following libraries are required:
